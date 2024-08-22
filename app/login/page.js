@@ -4,21 +4,20 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../lib/firebaseConfig';
-import { setAuthState } from '../store/authSlice';
+import {auth} from '../lib/firebaseConfig'
+import {setAuthState} from '../store/authSlice'
 import { useAppDispatch } from "../store";
-
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
-    dispatch(setAuthState(true));
+    dispatch(setAuthState(true))
     try {
       const credential = await signInWithEmailAndPassword(
         auth,
@@ -41,16 +40,20 @@ export default function Login() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-        <div className="p-6 space-y-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Speak thy secret word!
           </h1>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4 md:space-y-6"
+            action="#"
+          >
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your email
               </label>
@@ -60,7 +63,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="name@company.com"
                 required
               />
@@ -68,7 +71,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Password
               </label>
@@ -79,7 +82,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
                 placeholder="••••••••"
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
               />
             </div>
@@ -93,15 +96,15 @@ export default function Login() {
             )}
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-indigo-600 dark:hover:bg-indigo-700"
+              className="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-primary-800"
             >
               Enter
             </button>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
               Don&apos;t have an account?{" "}
               <Link
                 href="/register"
-                className="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
+                className="font-medium text-gray-600 hover:underline dark:text-gray-500"
               >
                 Register here
               </Link>
