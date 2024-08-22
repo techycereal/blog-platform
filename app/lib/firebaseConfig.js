@@ -4,7 +4,8 @@ import { getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// Your web app's Firebase  configuration
+console.log(process.env.FIREBASE_API_KEY)
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: `${process.env.FIREBASE_ID}.firebaseapp.com`,
