@@ -28,9 +28,6 @@ export default function Login() {
           Authorization: `Bearer ${idToken}`,
         },
       });
-
-      // Handle the response from the login endpoint
-      if (loginResponse.ok) {
         // Fetch redirection details from a separate endpoint
         const redirectResponse = await fetch('/api/redirect');
         const redirectUrl = await redirectResponse.json();
@@ -42,10 +39,6 @@ export default function Login() {
           // Handle the case where no redirection URL is provided
           router.push('/');
         }
-      } else {
-        // Handle login failure
-        setError('Login failed');
-      }
     } catch (e) {
       setError(e.message);
     }
