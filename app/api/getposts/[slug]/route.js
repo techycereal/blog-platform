@@ -1,21 +1,5 @@
-import { MongoClient, ServerApiVersion } from 'mongodb';
 import { NextResponse } from 'next/server';
-
-const uri = "mongodb+srv://alexanderjmilliken:Jckctsaadm10@cluster0.ym3g10m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-export const dynamic = 'force-dynamic';
-
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-async function connect(database_name) {
-  await client.connect();
-  return client.db(database_name);
-}
+import {connect} from '../../../lib/databaseUtil'
 
 export async function GET(request, { params }) {
   try {

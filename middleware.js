@@ -26,7 +26,7 @@ export async function middleware(request) {
     const { uid } = tokens.decodedToken;
     if (!userCache.has(uid)) {
       try {
-        const apiResponse = await fetch(`http://localhost:3000/api/user/${uid}`);
+        const apiResponse = await fetch(`/api/user/${uid}`);
         if (!apiResponse.ok) {
           throw new Error('Failed to fetch user data');
         }
