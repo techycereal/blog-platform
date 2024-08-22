@@ -5,5 +5,5 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
     // Perform a 307 redirect to the root ('/')
-    return NextResponse.redirect(new URL('/', request.url), 307);
+    return NextResponse.redirect(new URL('/', request.url), 308);
 }
