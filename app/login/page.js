@@ -1,13 +1,10 @@
-'use client';
-
-import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../lib/firebaseConfig';
 import { setAuthState } from '../store/authSlice';
 import { useAppDispatch } from "../store";
-
+import Link from "next/link";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,17 +16,35 @@ export default function Login() {
     event.preventDefault();
     setError("");
     dispatch(setAuthState(true));
+
     try {
       const credential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await credential.user.getIdToken();
 
-      await fetch("/api/login", {
+      // Send the token to the login API endpoint
+      const loginResponse = await fetch("/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
       });
 
-      await fetch('/api/redirect')
+      // Handle the response from the login endpoint
+      if (loginResponse.ok) {
+        // Fetch redirection details from a separate endpoint
+        const redirectResponse = await fetch('/api/redirect');
+        const redirectUrl = await redirectResponse.json();
+
+        if (redirectUrl?.url) {
+          // Redirect to the URL obtained from the response
+          router.push(redirectUrl.url);
+        } else {
+          // Handle the case where no redirection URL is provided
+          router.push('/');
+        }
+      } else {
+        // Handle login failure
+        setError('Login failed');
+      }
     } catch (e) {
       setError(e.message);
     }
