@@ -7,7 +7,7 @@ import { getAuth } from 'firebase/auth';
 // Your web app's Firebase  configuration
 console.log(process.env.FIREBASE_API_KEY)
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: 'AIzaSyB14P-5LEBP12XoFd_ZRzfTqf5QHNNBLAg',
   authDomain: `${process.env.FIREBASE_ID}.firebaseapp.com`,
   projectId: process.env.FIREBASE_ID,
   storageBucket: `${process.env.FIREBASE_ID}.appspot.com`,
