@@ -36,11 +36,11 @@ export default function Login() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-900">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg dark:bg-gray-800">
         <div className="p-6 md:p-8 space-y-6">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white text-center">
-            Speak thy secret word!
+            Log In!
           </h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -80,7 +80,7 @@ export default function Login() {
             )}
             <button
               type="submit"
-              className="w-full py-2.5 rounded-md bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 focus:ring-2 focus:ring-primary-600 focus:outline-none dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-500"
+              className="w-full py-2.5 rounded-md bg-blue-600 text-white font-medium text-sm hover:bg-primary-700 focus:ring-2 focus:ring-primary-600 focus:outline-none dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-500"
             >
               Enter
             </button>
