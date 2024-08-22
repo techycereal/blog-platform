@@ -29,16 +29,7 @@ export default function Login() {
         },
       });
         // Fetch redirection details from a separate endpoint
-        const redirectResponse = await fetch('/api/redirect');
-        const redirectUrl = await redirectResponse.json();
-
-        if (redirectUrl?.url) {
-          // Redirect to the URL obtained from the response
-          router.push(redirectUrl.url);
-        } else {
-          // Handle the case where no redirection URL is provided
-          router.push('/');
-        }
+      await fetch('/api/redirect');
     } catch (e) {
       setError(e.message);
     }
