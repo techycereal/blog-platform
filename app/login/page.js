@@ -29,8 +29,8 @@ export default function Login() {
         },
       });
         // Fetch redirection details from a separate endpoint
-      await fetch('/api/redirect');
-      router.push('/')
+        window.location.href = '/';
+
     } catch (e) {
       setError(e.message);
     }
