@@ -29,7 +29,8 @@ export default function Login() {
         },
       });
         // Fetch redirection details from a separate endpoint
-      await fetch('/api/redirect');
+      const response = await fetch('/api/redirect');
+      console.log(response)
     } catch (e) {
       setError(e.message);
     }
