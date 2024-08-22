@@ -4,6 +4,10 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
-  // Continue processing if authenticated
-  return NextResponse.redirect(new URL('/', request.url))
+    const url = request.nextUrl.clone()   
+    
+    if (url.pathname === '/') {
+      url.pathname = '/hello-nextjs'
+      return NextResponse.redirect(url)   
+    } 
 }

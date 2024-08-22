@@ -23,7 +23,7 @@ export default function Login() {
       const idToken = await credential.user.getIdToken();
 
       // Send the token to the login API endpoint
-      const loginResponse = await fetch("/api/login", {
+      await fetch("/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
