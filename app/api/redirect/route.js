@@ -5,9 +5,6 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
     const url = request.nextUrl.clone()   
-    
-    if (url.pathname === '/') {
-      url.pathname = '/hello-nextjs'
-      return NextResponse.redirect(url)   
-    } 
+    url.pathname = '/'
+    return NextResponse.redirect(url)   
 }
