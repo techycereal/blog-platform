@@ -33,9 +33,9 @@ export async function middleware(request) {
         if (!apiResponse.ok) {
           throw new Error('Failed to fetch user data');
         }
-        console.log(userData)
-        const userData = await apiResponse.json();
         
+        const userData = await apiResponse.json();
+        console.log(userData)
         userCache.set(uid, userData.data);
   
         // Create response object and set cookie
