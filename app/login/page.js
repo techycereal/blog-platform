@@ -29,7 +29,7 @@ export default function Login() {
         },
       });
         // Fetch redirection details from a separate endpoint
-        window.location.href = '/';
+        router.push('/')
 
     } catch (e) {
       setError(e.message);
