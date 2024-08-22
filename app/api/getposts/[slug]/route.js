@@ -20,7 +20,6 @@ export async function GET(request, { params }) {
       .toArray();
 
     const response = NextResponse.json({ data: query });
-    response.headers.set('Cache-Control', 'no-store'); // Prevent caching
 
     return response;
   } catch (err) {

@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 import { auth } from "../lib/firebaseConfig";
 import { useRouter } from "next/navigation";
+
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
