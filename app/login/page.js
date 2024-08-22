@@ -1,29 +1,26 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../lib/firebaseConfig'
-import {setAuthState} from '../store/authSlice'
+import { auth } from '../lib/firebaseConfig';
+import { setAuthState } from '../store/authSlice';
 import { useAppDispatch } from "../store";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
-    dispatch(setAuthState(true))
+    dispatch(setAuthState(true));
     try {
-      const credential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const credential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await credential.user.getIdToken();
 
       await fetch("/api/login", {
@@ -34,27 +31,20 @@ export default function Login() {
 
       router.push("/");
     } catch (e) {
-      setError((e).message);
+      setError(e.message);
     }
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-900">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg dark:bg-gray-800">
+        <div className="p-6 md:p-8 space-y-6">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white text-center">
             Speak thy secret word!
           </h1>
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-4 md:space-y-6"
-            action="#"
-          >
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Your email
               </label>
               <input
@@ -63,16 +53,13 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="mt-1 block w-full p-2.5 rounded-md border border-gray-300 bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-500"
                 placeholder="name@company.com"
                 required
               />
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Password
               </label>
               <input
@@ -81,31 +68,25 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
+                className="mt-1 block w-full p-2.5 rounded-md border border-gray-300 bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-500"
                 placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
               />
             </div>
             {error && (
-              <div
-                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                role="alert"
-              >
-                <span className="block sm:inline">{error}</span>
+              <div className="bg-red-50 border border-red-400 text-red-700 p-4 rounded-md" role="alert">
+                <span>{error}</span>
               </div>
             )}
             <button
               type="submit"
-              className="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-primary-800"
+              className="w-full py-2.5 rounded-md bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 focus:ring-2 focus:ring-primary-600 focus:outline-none dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-500"
             >
               Enter
             </button>
-            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
               Don&apos;t have an account?{" "}
-              <Link
-                href="/register"
-                className="font-medium text-gray-600 hover:underline dark:text-gray-500"
-              >
+              <Link href="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                 Register here
               </Link>
             </p>
