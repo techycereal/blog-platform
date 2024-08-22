@@ -44,17 +44,14 @@ export default function SignInPage() {
 
   function AllPosts() {
     return posts.map((post) => (
-      <div key={post._id} className="bg-white shadow-lg border border-gray-200 rounded-lg p-6 mb-6 transition-transform transform hover:scale-105">
-        <h3 className="font-bold text-xl mb-2 text-blue-600">
-          <Link href={`/post/${post._id}`}>{post.title}</Link>
-        </h3>
-        <p className="text-sm text-gray-700 mb-4">
-          {truncateContent(post.content)}
-        </p>
-        <p className="text-sm text-gray-600 mb-2">
-          By: <Link href={`/user/${post.owner}`} className="text-blue-600 hover:underline">{post.ownerName}</Link>
-        </p>
-      </div>
+      <Link key={post._id} href={`/post/${post._id}`}>
+        <div className="bg-white shadow-lg border border-gray-200 rounded-lg p-6 mb-6 transition-transform transform hover:scale-105">
+          <h3 className="font-bold text-xl mb-2 text-blue-600">{post.title}</h3>
+          <p className="text-sm text-gray-700 mb-4">
+            {truncateContent(post.content)}
+          </p>
+        </div>
+      </Link>
     ));
   }
 

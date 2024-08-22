@@ -24,13 +24,16 @@ export async function middleware(request) {
   });
   if (tokens) {
     const { uid } = tokens.decodedToken;
+    console.log(uid)
     if (!userCache.has(uid)) {
       try {
         const apiResponse = await fetch(`/api/user/${uid}`);
         if (!apiResponse.ok) {
           throw new Error('Failed to fetch user data');
         }
+        console.log(userData)
         const userData = await apiResponse.json();
+        
         userCache.set(uid, userData.data);
   
         // Create response object and set cookie
