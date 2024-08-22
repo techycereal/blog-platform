@@ -30,6 +30,7 @@ export default function Login() {
       });
         // Fetch redirection details from a separate endpoint
       await fetch('/api/redirect');
+      router.push('/')
     } catch (e) {
       setError(e.message);
     }
