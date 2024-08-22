@@ -27,7 +27,7 @@ export async function middleware(request) {
     console.log(uid)
     if (!userCache.has(uid)) {
       try {
-        const url = `/api/user/${uid}`
+        const url = `${process.env.BASE_URL}/api/user/${uid}`
         console.log(url)
         const apiResponse = await fetch(url);
         if (!apiResponse.ok) {
