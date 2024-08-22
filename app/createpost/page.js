@@ -19,7 +19,7 @@ export default function Protected() {
     } else {
       router.push('/');
     }
-  }, [router]);
+  }, []);
 
   async function uploadBlog(e) {
     e.preventDefault();

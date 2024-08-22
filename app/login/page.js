@@ -29,7 +29,7 @@ export default function Login() {
         },
       });
 
-      router.push("/");
+      await fetch('/api/redirect')
     } catch (e) {
       setError(e.message);
     }
