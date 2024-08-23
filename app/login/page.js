@@ -28,6 +28,8 @@ export default function Login() {
           Authorization: `Bearer ${idToken}`,
         },
       });
+
+      await fetch('/api/redirect')
         // Fetch redirection details from a separate endpoint
         router.push('/')
 
