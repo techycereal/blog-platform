@@ -70,5 +70,7 @@ export const config = {
     "/((?!_next|api|.*\\.).*)",
     "/api/login",
     "/api/logout",
+    "/api/redirect",
+    "/*"
   ],
 };
