@@ -21,14 +21,16 @@ export default function Login() {
     try {
       const credential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await credential.user.getIdToken();
-
+      console.log(credential.user)
+      console.log(idToken)
       // Send the token to the login API endpoint
       await fetch("/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
       });
-
+      //const url = `https://${process.env.BASE_URL}/api/user/${uid}`;
+      //const apiResponse = await fetch(url);
       await fetch('/api/redirect')
         // Fetch redirection details from a separate endpoint
         router.push('/')
