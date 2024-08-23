@@ -71,5 +71,6 @@ export const config = {
     "/api/login",
     "/api/logout",
     "/api/redirect",
+    "/:path"
   ],
 };
