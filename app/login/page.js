@@ -21,21 +21,21 @@ export default function Login() {
     try {
       const credential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await credential.user.getIdToken();
-      console.log(credential.user)
-      console.log(idToken)
+      console.log(credential.user);
+      console.log(idToken);
+      
       const url = `https://blog-platform-kappa-ochre.vercel.app/api/user/${credential.user.uid}`;
       const apiResponse = await fetch(url);
-      console.log(apiResponse.data)
-      localStorage.setItem('userData', apiResponse.data)
-      console.log('HEREEREER')
+      const data = await apiResponse.json();
+      console.log(data); // Log the actual data
+      console.log('HEREEREER');
 
       await fetch("https://blog-platform-kappa-ochre.vercel.app/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
       });
-        router.push('/')
-
+      router.push('/');
     } catch (e) {
       setError(e.message);
     }
