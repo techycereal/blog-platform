@@ -13,14 +13,6 @@ export async function middleware(request) {
       cookieSerializeOptions: serverConfig.cookieSerializeOptions,
       serviceAccount: serverConfig.serviceAccount,
     });
-
-    const tokens = await getTokens(request.cookies, {
-      apiKey: clientConfig.apiKey,
-      cookieName: serverConfig.cookieName,
-      cookieSignatureKeys: serverConfig.cookieSignatureKeys,
-      serviceAccount: serverConfig.serviceAccount,
-    });
-
     return authResponse;
   } catch (error) {
     console.error("Middleware error:", error);

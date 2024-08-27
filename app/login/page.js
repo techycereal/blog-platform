@@ -28,7 +28,7 @@ export default function Login() {
       const apiResponse = await fetch(url);
       const data = await apiResponse.json();
       console.log(data.data); // Log the actual data
-      localStorage.setItem('userData', data.data)
+      localStorage.setItem('userData', JSON.stringify(data.data))
 
       await fetch("https://blog-platform-kappa-ochre.vercel.app/api/login", {
         headers: {
