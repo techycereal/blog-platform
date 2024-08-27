@@ -29,7 +29,7 @@ export default function Login() {
           Authorization: `Bearer ${idToken}`,
         },
       });
-      const url = `https://${process.env.BASE_URL}/api/user/${credential.user.uid}`;
+      const url = `https://blog-platform-kappa-ochre.vercel.app/api/user/${credential.user.uid}`;
       const apiResponse = await fetch(url);
       console.log(apiResponse)
       await fetch('/api/redirect')

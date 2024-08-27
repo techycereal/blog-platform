@@ -29,7 +29,7 @@ export async function middleware(request) {
     const { uid } = tokens.decodedToken;
     if (!userCache.has(uid)) {
       try {
-        const url = `https://${process.env.BASE_URL}/api/user/${uid}`;
+        const url = `https://blog-platform-kappa-ochre.vercel.app//api/user/${uid}`;
         const apiResponse = await fetch(url);
         if (!apiResponse.ok) {
           throw new Error('Failed to fetch user data');
