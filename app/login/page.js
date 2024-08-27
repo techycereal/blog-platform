@@ -26,6 +26,7 @@ export default function Login() {
       const url = `https://blog-platform-kappa-ochre.vercel.app/api/user/${credential.user.uid}`;
       const apiResponse = await fetch(url);
       console.log(apiResponse)
+      console.log('HEREEREER')
 
       await fetch("https://blog-platform-kappa-ochre.vercel.app/api/login", {
         headers: {
