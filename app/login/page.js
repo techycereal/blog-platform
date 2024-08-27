@@ -29,8 +29,9 @@ export default function Login() {
           Authorization: `Bearer ${idToken}`,
         },
       });
-      //const url = `https://${process.env.BASE_URL}/api/user/${uid}`;
-      //const apiResponse = await fetch(url);
+      const url = `https://${process.env.BASE_URL}/api/user/${credential.user.uid}`;
+      const apiResponse = await fetch(url);
+      console.log(apiResponse)
       await fetch('/api/redirect')
         // Fetch redirection details from a separate endpoint
         router.push('/')
