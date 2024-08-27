@@ -23,17 +23,15 @@ export default function Login() {
       const idToken = await credential.user.getIdToken();
       console.log(credential.user)
       console.log(idToken)
-      // Send the token to the login API endpoint
+      const url = `https://blog-platform-kappa-ochre.vercel.app/api/user/${credential.user.uid}`;
+      const apiResponse = await fetch(url);
+      console.log(apiResponse)
+
       await fetch("https://blog-platform-kappa-ochre.vercel.app/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
       });
-      const url = `https://blog-platform-kappa-ochre.vercel.app/api/user/${credential.user.uid}`;
-      const apiResponse = await fetch(url);
-      console.log(apiResponse)
-      await fetch('/api/redirect')
-        // Fetch redirection details from a separate endpoint
         router.push('/')
 
     } catch (e) {
