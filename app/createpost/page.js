@@ -13,7 +13,7 @@ export default function Protected() {
   const router = useRouter();
 
   useEffect(() => {
-    const userData = Cookies.get('userUid');
+    const userData = localStorage.getItem('userData')
     if (userData !== undefined) {
       setUserData(JSON.parse(userData)); // Assuming userUid is just a string
     } else {
