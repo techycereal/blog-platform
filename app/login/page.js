@@ -24,7 +24,7 @@ export default function Login() {
       console.log(credential.user)
       console.log(idToken)
       // Send the token to the login API endpoint
-      await fetch("/api/login", {
+      await fetch("https://blog-platform-kappa-ochre.vercel.app/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
