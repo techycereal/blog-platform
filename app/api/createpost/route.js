@@ -82,9 +82,3 @@ export async function POST(request) {
     return NextResponse.json({ error: 'An error occurred while creating the post.' }, { status: 500 });
   }
 }
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
