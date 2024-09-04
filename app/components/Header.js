@@ -6,12 +6,15 @@ import { useRouter } from "next/navigation";
 import { auth } from '../lib/firebaseConfig';
 import { setAuthState } from '../store/authSlice';
 import { useAppDispatch } from "../store";
-
+import { useEffect, useState } from "react";
 export default function Header() {
     const authState = useAppSelector((state) => state.auth.authState);
     const router = useRouter();
     const dispatch = useAppDispatch();
-
+    useEffect(() => {
+        const authToken = localStorage.getItem('userData');
+        dispatch(setAuthState(!!authToken))
+      }, []);
     async function handleLogout() {
         // Sign out from Firebase auth
         await fetch("/api/logout");
@@ -24,7 +27,7 @@ export default function Header() {
     }
 
     return (
-        <header className="bg-blue-600 text-white shadow-md p-4">
+        <header className="bg-blue-900 text-white shadow-md p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-lg font-bold">
                     <Link href='/' className="hover:text-gray-200 transition duration-200">

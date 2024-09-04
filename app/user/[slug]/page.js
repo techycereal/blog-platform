@@ -1,6 +1,7 @@
 'use client';
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function UserPage({ params }) {
   const [userInfo, setUserInfo] = useState(null);
@@ -19,26 +20,61 @@ export default function UserPage({ params }) {
     getUserPosts();
   }, [params.slug]);
 
+  // Helper function to truncate content if it exceeds 30 words
+  const truncateContent = (content, maxWords = 30) => {
+    const words = content.split(' ');
+    if (words.length <= maxWords) {
+      return content;
+    }
+    return `${words.slice(0, maxWords).join(' ')}...`;
+  };
+
   function AllPosts() {
-    return posts.map((post) => (
-      <div key={post.title} className="bg-white shadow-md border border-gray-200 rounded-lg p-4 mb-6 transition-transform transform hover:scale-105 hover:shadow-lg">
-        <h3 className="font-bold text-xl text-blue-600 mb-2">{post.title}</h3>
-        <p className="text-gray-700">{post.content}</p>
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {posts.map((post) => (
+          <div key={post._id} className="bg-gray-900 shadow-lg border border-gray-700 rounded-lg p-6 transition-transform transform hover:scale-105">
+            
+            {post.fileUrl && (
+              <img
+                src={post.fileUrl}
+                alt="Post Image"
+                className="w-full h-50 object-cover object-top rounded-lg"
+              />
+            )}
+            <h3 className="font-bold text-xl mb-2 text-white">
+              <Link href={`/post/${post._id}`} className="hover:underline">
+                {post.title}
+              </Link>
+            </h3>
+            <p className="text-gray-300 mb-4">
+              {truncateContent(post.content)}
+            </p>
+            <p className="text-gray-500 mt-4">
+              Posted by:{" "}
+              <Link href={`/user/${post.owner}`} className="text-gray-300 hover:underline">
+                {post.owner}
+              </Link>
+            </p>
+          </div>
+        ))}
       </div>
-    ));
+    );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-100 min-h-screen">
-      {userInfo ? (
-        <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
-          <h1 className="text-3xl font-bold text-blue-600 mb-2">{userInfo.ownerName}</h1>
-          <p className="text-gray-600 text-lg">{userInfo.owner}</p>
-        </div>
-      ) : (
-        <p className="text-center text-gray-600">Loading user info...</p>
-      )}
-      {posts.length > 0 ? <AllPosts /> : <p className="text-center text-gray-600">Loading posts...</p>}
+    <div className="bg-gray-700 min-h-screen">
+      <div className="max-w-4xl mx-auto p-6 bg-gray-900 min-h-screen">
+        {userInfo ? (
+          <div className="bg-gray-800 shadow-lg rounded-lg p-6 mb-8">
+            <h1 className="text-3xl font-bold text-white mb-2">{userInfo.ownerName}</h1>
+            <p className="text-gray-400 text-lg">{userInfo.owner}</p>
+          </div>
+        ) : (
+          <p className="text-center text-gray-400">Loading user info...</p>
+        )}
+        {posts.length > 0 ? <AllPosts /> : <p className="text-center text-gray-400">Loading posts...</p>}
+      </div>
     </div>
   );
 }

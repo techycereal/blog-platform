@@ -1,18 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal overflow */
-  }
-
   /* globals.css or specific carousel CSS file */
-.slick-dots li button:before {
+  .slick-dots li button:before {
     color: white; /* Change dot color to white */
   }
   .slick-dots li.slick-active button:before {
     color: #fff; /* Optionally, highlight active dot */
   }
-  

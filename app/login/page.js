@@ -6,6 +6,7 @@ import { auth } from '../lib/firebaseConfig';
 import { setAuthState } from '../store/authSlice';
 import { useAppDispatch } from "../store";
 import Link from "next/link";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,14 +24,13 @@ export default function Login() {
       const idToken = await credential.user.getIdToken();
       console.log(credential.user);
       console.log(idToken);
-      
-      const url = `https://blog-platform-kappa-ochre.vercel.app/api/user/${credential.user.uid}`;
+
+      const url = `/api/user/${credential.user.uid}`;
       const apiResponse = await fetch(url);
       const data = await apiResponse.json();
-      console.log(data.data); // Log the actual data
       localStorage.setItem('userData', JSON.stringify(data.data))
 
-      await fetch("https://blog-platform-kappa-ochre.vercel.app/api/login", {
+      await fetch("/api/login", {
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
@@ -42,15 +42,15 @@ export default function Login() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg dark:bg-gray-800">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-700">
+      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg">
         <div className="p-6 md:p-8 space-y-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white text-center">
+          <h1 className="text-2xl font-bold text-white text-center">
             Log In!
           </h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
                 Your email
               </label>
               <input
@@ -59,13 +59,13 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
-                className="mt-1 block w-full p-2.5 rounded-md border border-gray-300 bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-500"
+                className="mt-1 block w-full p-2.5 rounded-md border border-gray-600 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="name@company.com"
                 required
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
                 Password
               </label>
               <input
@@ -74,7 +74,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
-                className="mt-1 block w-full p-2.5 rounded-md border border-gray-300 bg-gray-50 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-500"
+                className="mt-1 block w-full p-2.5 rounded-md border border-gray-600 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="••••••••"
                 required
               />
@@ -86,13 +86,13 @@ export default function Login() {
             )}
             <button
               type="submit"
-              className="w-full py-2.5 rounded-md bg-blue-600 text-white font-medium text-sm hover:bg-primary-700 focus:ring-2 focus:ring-primary-600 focus:outline-none dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-500"
+              className="w-full py-2.5 rounded-md bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:outline-none"
             >
               Enter
             </button>
-            <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+            <p className="text-sm text-gray-400 text-center">
               Don&apos;t have an account?{" "}
-              <Link href="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
+              <Link href="/register" className="font-medium text-blue-600 hover:underline">
                 Register here
               </Link>
             </p>
