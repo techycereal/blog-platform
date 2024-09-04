@@ -9,8 +9,8 @@ const firebaseConfig = {
   authDomain: `blog-platform-6c30c.firebaseapp.com`,
   projectId: 'blog-platform-6c30c',
   storageBucket: `blog-platform-6c30c.appspot.com`,
-  messagingSenderId: '126706130439',
-  appId: '1:126706130439:web:a7a42bae2791ac522314a2'
+  messagingSenderId: process.env.MESSAGE_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID
 };
 
 // Initialize Firebase
